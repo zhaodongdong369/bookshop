@@ -1,0 +1,70 @@
+<extend name="/base" />
+<block name="p1">订单</block>
+<block name="p2">已完成订单</block>
+<block name="main">
+
+
+        <article class="module">
+            <header><h3>订单列表</h3></header>
+            <fieldset>
+            <form action="__ROOT__/Order/forderlist" method="get">
+                <table class="table  table-striped">
+                    <td>选择日期 <img style="cursor:pointer" onClick="zwl_setdate_moveShow(event,'select',(new Date()).getFullYear(),(new Date()).getMonth()+1,(new Date()).getDate())"
+                             src="__PUBLIC__/images/calendar.gif" /></td>
+                    <td>
+
+                        <input name="select" type="text" id="select" size="18" value="{$select}"  >
+
+                    </td>
+
+                    <td><input type="submit" value="搜索" /> </td>
+
+                </table>
+            </form>
+            <table class="table  table-striped">
+                    <thead><th>订单Id</th><th>订单时间 </th><th>订单内容</th>
+                    <th>总价格</th><th>收件人</th><th> 联系方式</th><th>地址</th>
+                    <th>是否发货</th></thead>
+                    <tbody>
+
+                    <volist name="list" id="vo">
+                        <tr><td>{$vo.id}</td>
+                            <td>{$vo.confirmtime}</td>
+                            <td>{$vo.tip}</td>
+                            <td>{$vo.total} ￥</td>
+                            <td>{$vo.username}</td>
+                            <td>{$vo.tel}</td>
+                            <td>{$vo.location}</td>
+                            <td><eq name="vo.admin" value="0"><a href="#" id="send" num="{$vo.id}">未发货</a> </eq>
+                                <eq name="vo.admin"  value="1"><a href="#" id="send" num="{$vo.id}">已发货</a></eq>
+                            </td>
+
+                        </tr>
+                    </volist>
+
+                    </tbody>
+                </table>
+            </fieldset>
+ <div class="clear"></div>
+            <footer>{$page}</footer>
+
+        </article>
+    <script src="__PUBLIC__/js/zwl_Calendars.js"></script>
+    <script>
+    date_obj=new zwl_setdate_panel();
+    date_obj.startYear=2014;
+    date_obj.endYear=2020;
+    date_obj.loadding();
+    $('#send').click(function(){
+        id=$(this).attr('num');
+        $.get('__ROOT__/Order/setAdmin/id/'+id,function(data){
+           if(data=='1'){
+               $('#send').html('已发货');
+           }else{
+               $('#send').html('未发货');
+           }
+        });
+    });
+
+</script>
+</block>

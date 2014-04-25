@@ -1,0 +1,156 @@
+<extend name="/base" />
+
+<block name=left>
+<script>
+    function plus(id,price){
+        num=$('#bcount'+id).val();
+        $('#bcount'+id).val(num-0+1);
+        total=$('#sum').text();
+        $('#sum').html(total-0+price);
+    }
+    function dec(id,price){
+        num=$('#bcount'+id).val();
+        $('#bcount'+id).val(num-1);
+        total=$('#sum').text();
+        $('#sum').html(total-0-price);
+    }
+</script>
+    <div id="demo" class="demolayout">
+        <ul id="demo-nav" class="demolayout">
+            <li><a  id="nav1" class="active">当前订单 </a></li>
+            <li><a id="nav2">未完成订单</a></li>
+            <li><a id="nav3" href="__ROOT__/Book/paydone">已完成订单</a></li>
+        </ul>
+        <div class="tabs-container">
+            <div style="display: {$disp1}" class="tab"  id="tab1">
+
+                <table class="table table-bordered table-striped table-condensed" >
+                    <caption>当前订单</caption>
+                    <thead><th>图书ID</th><th>图书名</th><th>图书单价</th><th>折扣</th><th>图书数量</th></thead>
+                    <tbody>
+                    <form action="#" id="bookform" >
+                    <volist name="orders" id="vo">
+                        <tr><td>{$vo.id}</td><td>{$vo.cnname}</td><td>{$vo.price}</td><td>{$vo.discont}</td>
+
+                            <td>
+                                <input name="b{$vo.id}" id="bcount{$vo.id}" readonly type="text" value="{$vo.count}" maxlength="2" style="width:40px;" />
+                                <a href="#" onclick="plus({$vo.id},{$vo.price})"> <img src="__PUBLIC__/images/add.png"   height="20px" width="20px" >
+                            </a>
+                                <a  onclick="dec({$vo.id},{$vo.price})" href="#">
+                                    <img src="__PUBLIC__/images/dec.png"  height="20px" width="20px">
+                                </a>
+
+
+
+                            </td></tr>
+                    </volist>
+                    </form>
+                    <tr><td colspan="2">总价</td><td colspan="3"><div id="sum">{$total}</div> ￥</td> </tr>
+                    <gt name="total" value="0">
+                        <tr><td colspan="5"><a id="save">保存并支付</a>
+                       </td> </tr>
+                    </gt>
+                    <tr><td colspan="5"><div id="tips"></div></td> </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div style="display: {$disp2}" class="tab" id="tab2">
+                <table class="table table-bordered table-striped table-condensed"  id="tab1">
+                    <caption>历史订单</caption>
+                    <thead><th>订单id</th><th>订单内容</th><th>总价格</th><th>订单时间</th><th>操作</th></thead>
+                    <tbody>
+                    <volist name="orderlist" id="vo">
+                        <tr><td>{$vo.id}</td><td>{$vo.tip}</td><td>{$vo.total} ￥</td><td>{$vo.ordertime}</td>
+                        <td><a id="payFromDb" num="{$vo.id}">支付</a>|<a id="del2" num="{$vo.id}">删除订单</a></td>
+                        </tr>
+                    </volist>
+                    <tr><td colspan="5"><div id="deltip"></div></td> </tr>
+                  </tbody>
+                </table>
+            </div>
+
+            <div style="display: {$disp3}" class="tab" id="tab3" >
+            <form action="__ROOT__/Book/payStep2" method="post">
+                <table class="table table-bordered table-striped table-condensed"  id="tab1">
+                    <input type="hidden" name="oid" id="oid" />
+                    <caption>发货信息</caption>
+                    <tbody>
+                    <tr><td>收件人</td><td><input type="text" name="username"  value="{$user.truename}" /> </td></tr>
+                    <tr><td>手机号</td><td><input type="text" name="tel" value="{$user.tel}"  /></td></tr>
+                    <tr><td>收货地址</td><td><input type="text" name="location"  value="{$user.addr}" /></td></tr>
+                    <tr><td colspan="2" ><input type="submit" value="提交" /> </td> </tr>
+                    </tbody>
+                </table>
+
+            </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="__PUBLIC__/admin/js/jquery-1.5.2.min.js"></script>
+    <script>
+        $(function(){
+
+            $('#plus').click(function(){
+                num=$('#bcount').val()-0+1;
+                $('#bcount').val(num);
+            });
+            $('#dec').click(function(){
+                num=$('#bcount').val()-1;
+                if(num>-1){
+                    $('#bcount').val(num);
+                }
+            });
+
+            $('#payFromDb').click(function(){
+                $('#tab3').show();
+                $('#oid').val($(this).attr('num'));
+            });
+
+            $('#del2').click(function(){
+                id=$(this).attr('num');
+                $.get('__ROOT__/Book/delOrder/id/'+id,function(data){
+                    window.location.href="__ROOT__/Book/pay/tab/1";
+                });
+            });
+            $('#nav1').hover(function(){
+                $('#tab3').hide();
+                $('#tab1').show();
+                $(this).addClass('active');
+                $('#nav2').removeClass('active');
+                $('#tab2').hide();
+
+            });
+            $('#nav2').hover(function(){
+                $('#tab3').hide();
+                $('#tab1').hide();
+                $('#nav1').removeClass('active');
+                $('#tab2').show();
+                $(this).addClass('active');
+
+            });
+           $('#save').click(function(){
+
+                formdata=$('#bookform').serialize();
+               $.getJSON('__ROOT__/Book/save/form/'+formdata,function(data){
+                   window.location.href="__ROOT__/Book/pay/tab/2";
+
+               });/*
+               $.get('__ROOT__/Book/save',function(data){
+
+                   if(data>0) $('#tips').html("<font color='green'>订单保存成功</font>");else {$('#tips').html('' +
+                           "<font color='#ff4500'>订单已存在,保存失败</font>");
+                   $('#save').hide();
+                   }
+               });*/
+           }) ;
+
+
+        });
+
+
+    </script>
+</block>

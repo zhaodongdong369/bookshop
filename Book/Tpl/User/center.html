@@ -1,0 +1,111 @@
+<extend name="/base" />
+<block name=js></block>
+<block name=css>
+
+  <script src="__PUBLIC__/js/jquery-1.10.2.js"></script>
+    <script src="__PUBLIC__/js/jquery-ui.js"></script>
+
+    <style>
+        label, input { display:block; }
+        input.text { margin-bottom:12px; width:95%; padding: .4em; }
+        fieldset { padding:0; border:0; margin-top:25px; }
+        h1 { font-size: 1.2em; margin: .6em 0; }
+        div#users-contain { width: 350px; margin: 20px 0; }
+        div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+        div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+        .ui-dialog .ui-state-error { padding: .3em; }
+        .validateTips { border: 1px solid transparent; padding: 0.3em; }
+    </style>
+    <script>
+        $(function() {
+                $( "#dialog-form" ).dialog({
+                autoOpen: false,
+                height: 300,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "验证": function() {
+
+                        var answer = $( "#answer").val();
+                        $.get('__ROOT__/User/confirm/answer/'+answer,function(data){
+                            if(data=='ok'){
+                                $('#subform').submit();
+                            }else{
+                                $('#tips').html('验证失败，请重新验证!');
+                            }
+                        });
+                    },
+                    Cancel: function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+                close: function() {
+
+                }
+            });
+            $( "#create-user" )
+                    .button()
+                    .click(function() {
+                        $( "#dialog-form" ).dialog( "open" );
+                    });
+        });
+    </script>
+</block>
+        <block name=begin>
+            <div id="dialog-form" title="请输入您的提示问题的答案">
+                <p class="validateTips"></p>
+                <form>
+                    <fieldset>
+                        <label>您的提示问题为</label>
+                        <input type="text" readonly value="{$user.ques}"  class="text ui-widget-content ui-corner-all">
+                        <label for="email">请填写提示问题答案</label>
+                        <input type="password" name="answer" id="answer" class="text ui-widget-content ui-corner-all">
+                        </fieldset>
+                </form>
+            </div>
+        </block>
+<block name=left>
+    <div class="feat_prod_box_details">
+        <p class="details"></p>
+        <div class="contact_form">
+            <div class="form_subtitle">个人中心</div>
+            <form action="__ROOT__/User/update" method="post" id="subform">
+                <div class="form_row">
+                    <label class="contact"><strong>真实姓名:</strong></label>
+                    <input type="text" class="contact_input" name="truename" value="{$user.truename}" id="truename" /><div id="nametip">&nbsp;</div>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>联系方式:</strong></label>
+                    <input type="text" class="contact_input" value="{$user.tel}" name="tel" id="tel"/>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>电子邮箱:</strong></label>
+                    <input type="text" class="contact_input" value="{$user.email}" name="email" id="email"/>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>配送地址:</strong></label>
+                    <input type="text" class="contact_input" name="addr" value="{$user.addr}" id="addr"/>
+                </div>
+                <div class="form_row" id="tips">{$tips}</div>
+                <div class="form_row">
+                    <input type="button" id="update" class="btn " value="更新" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <script>
+        $('#update').click(function(){
+            $( "#dialog-form" ).dialog( "open" );
+        });
+        $(function(){
+            $('#subform').submit(function(){
+                if($('#truename').val()==''||$('#email').val()==''||$('#tel').val()==''||$('#addr').val()==''){
+                        alert('请填写完整信息');
+                        return false;
+                }
+            });
+        });
+    </script>
+    <div class="clear"></div>
+</block>

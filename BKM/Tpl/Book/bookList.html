@@ -1,0 +1,58 @@
+<extend name="/base" />
+<block name="p1">书籍</block>
+<block name="p2">书籍列表</block>
+<block name="main">
+    <article class="module width_full">
+            <header><h3 class="tabs_involved">书籍列表</h3>
+                <ul class="tabs">
+                    <li><a href="#tab1">列表</a></li>
+                   <!-- <li><a href="#tab2">Comments</a></li>-->
+                </ul>
+            </header>
+
+            <div class="tab_container">
+                <div id="tab1" class="tab_content">
+                    <table class="tablesorter" cellspacing="0">
+                        <thead>
+
+                        <tr>
+
+                            <th>书名</th>
+                            <th>ISBN</th>
+                            <th>出版社</th>
+                            <th>作者</th>
+                            <th>封面</th>
+                            <th>出版日期</th>
+                            <th>状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="list" id="vo">
+                            <tr>
+
+                                <td>{$vo.cnname}</td>
+                                <td>{$vo.isbn}</td>
+                                <td>{$vo.publisher}</td>
+                                <td>{$vo.author}</td>
+                                <td><img src="__PUBLIC__/img/{$vo.id}.jpg" /> </td>
+                                <td>{$vo.pubdate}</td>
+
+                                <td><a href="__ROOT__/Book/edit/bid/{$vo.id}" >
+                                    <input type="image" src="__PUBLIC__/admin/images/icn_edit.png" title="Edit"></a>
+                                    <a href="__ROOT__/Book/booklist/bid/{$vo.id}" onclick="return confirm('确定要删除?')"><input type="image" src="__PUBLIC__/admin/images/icn_trash.png" title="Trash"></a>
+                                </td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div><!-- end of #tab1 -->
+
+
+            </div><!-- end of .tab_container -->
+
+        </article><!-- end of content manager article -->
+<script>
+
+
+</script>
+</block>

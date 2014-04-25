@@ -1,0 +1,53 @@
+<extend name="/base" />
+<block name="p1">书籍</block>
+<block name="p2">添加分类</block>
+<block name="main">
+
+
+    <article class="module width_full">
+        <header><h4>添加分类</h4></header>
+        <div class="module_content">
+            <form method="post" id="form">
+                <fieldset>
+                    <input type="hidden" name="bid" value="{$book.id}" />
+                    <label>分类名</label>
+                    <input type="text" name="name" id="name" >
+                </fieldset>
+                <fieldset>
+
+                    <label>上一级</label>
+                    <select id="pid" name="pid" >
+                    <option value="0" style="height: 20px;">无</option>
+                    <volist name="cats" id="vo">
+                        <option value="{$vo.id}">{$vo.name}</option>
+
+                    </volist>
+                    </select>
+                     <label>&nbsp;</label>
+                </fieldset>
+
+                <fieldset>
+                    <div class="submit_link" >
+
+                        <input type="submit" id="sub" name="submit" value="保存" class="alt_btn">
+                        <input type="submit" value="重置">
+                    </div>
+                </fieldset>
+                <div class="clear"></div>
+            </form>
+        </div>
+        <footer>
+
+        </footer>
+
+    </article>
+    <!-- end of post new article -->
+    <script>
+
+        $('#isbn').focus();
+        $('#sub').mouseup(function(){
+            $('#form').submit();
+        });
+    </script>
+
+</block>

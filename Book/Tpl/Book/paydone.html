@@ -1,0 +1,27 @@
+<extend name="/base" />
+<block name=left>
+    <div id="demo" class="demolayout">
+        <ul id="demo-nav" class="demolayout">
+            <li><a  id="nav1" class="active">已完成订单 </a></li>
+            <li><a  id="nav2" class="active" href="__ROOT__/Book/pay">未完成订单 </a></li>
+        </ul>
+        <div class="tabs-container">
+            <div style="display: block;" class="tab"  id="tab1">
+                <table class="table table-bordered table-striped table-condensed" >
+
+                    <thead><th>订单ID</th><th>图书详情</th><th>总价</th><th>预定时间</th><th>完成时间</th><th>操作</th></thead>
+                    <tbody>
+                    <volist name="list" id="vo">
+                        <tr><td>{$vo.id}</td><td>{$vo.tip}</td><td>{$vo.total}￥</td><td>{$vo.ordertime}</td><td>{$vo.confirmtime}</td>
+                        <td><a href="__ROOT__/User/delOrder/id/{$vo.id}">删除</a></td>
+                       </tr>
+                    </volist>
+                  <tr><td colspan="6">{$page}</td> </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</block>

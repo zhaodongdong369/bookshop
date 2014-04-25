@@ -1,0 +1,46 @@
+<extend name="/base" />
+<block name="p1">用户</block>
+<block name="p2">用户列表</block>
+<block name="main">
+
+    <form method="post" action="__ROOT__/User/edit" id="form">
+        <article class="module">
+            <header><h3>用户列表</h3></header>
+            <fieldset>
+
+                <table class="table  table-striped">
+                    <thead><th>用户名</th><th>真实姓名</th>
+                    <th>注册时间</th><th>登陆次数</th><th>上次登录</th><th>编辑</th><th>删除</th></thead>
+                    <tbody>
+                    <volist name="list" id="vo">
+                        <tr><td>{$vo.username}</td>
+                            <td>{$vo.truename}</td>
+
+                            <td>{$vo.regtime}</td>
+                            <td>{$vo.logtime}</td>
+                            <td>{$vo.lastlogtime}</td>
+                            <td><a href="__ROOT__/User/detail/id/{$vo.id}">编辑</a></td>
+                            <td><a href="__ROOT__/User/del/id/{$vo.id}">删除</a></td>
+                        </tr>
+                    </volist>
+
+                    </tbody>
+                </table>
+            </fieldset>
+
+
+
+
+
+
+
+            <div class="clear"></div>
+            <footer>{$page}</footer>
+
+        </article>
+        <!-- end of post new article -->
+        <script>
+
+        </script>
+    </form>
+</block>

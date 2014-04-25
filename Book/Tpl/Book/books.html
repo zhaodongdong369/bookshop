@@ -1,0 +1,21 @@
+<extend name="/base" />
+<block name=left>
+
+    <div class="title"><span class="title_icon">
+    </span>书籍列表</div>
+    <div class="new_products">
+       <volist name="books" id="book">
+        <div class="new_prod_box"> <a href="__ROOT__/book/detail/bid/{$book.id}">{$book.cnname}</a>
+            <div class="new_prod_bg"> <a href="__ROOT__/book/detail/bid/{$book.id}">
+                <img src="__PUBLIC__/img/{$book.id}.jpg" alt="" title="" class="thumb" border="0" /></a> </div>
+        </div>
+       </volist>
+
+        <div class="pagination">
+          {$page}
+
+        </div>
+    </div>
+    <div class="clear"></div>
+
+</block>

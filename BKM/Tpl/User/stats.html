@@ -1,0 +1,61 @@
+<extend name="/base" />
+<block name="p1">用户</block>
+<block name="p2">注册统计</block>
+<block name="main">
+
+    <article class="module width_full">
+        <header><h3>Stats</h3></header>
+        <div class="module_content">
+            <article class="stats_graph">
+                <script type="text/javascript" src="//www.google.com/jsapi"></script>
+                <script type="text/javascript">
+                    google.load('visualization', '1', {packages: ['corechart']});
+                </script>
+                <script type="text/javascript">
+                    function drawVisualization() {
+                        // Create and populate the data table.
+                        var data = google.visualization.arrayToDataTable([
+                            ['x', '注册人数', '登录人数', 'test'],
+                            {$googledata}
+
+                        ]);
+
+                        // Create and draw the visualization.
+                        new google.visualization.LineChart(document.getElementById('visualization')).
+                                draw(data, {curveType: "function",
+                                    width: 500, height: 400,
+                                    vAxis: {maxValue: 15}}
+                        );
+                    }
+
+
+                    google.setOnLoadCallback(drawVisualization);
+                </script>
+
+                <div id="visualization" style="width: 500px; height: 400px;"></div>
+
+
+
+            </article>
+
+            <article class="stats_overview">
+                <div class="overview_today">
+                    <p class="overview_day">Today</p>
+                    <p class="overview_count">1,876</p>
+                    <p class="overview_type">Hits</p>
+                    <p class="overview_count">2,103</p>
+                    <p class="overview_type">Views</p>
+                </div>
+                <div class="overview_previous">
+                    <p class="overview_day">Yesterday</p>
+                    <p class="overview_count">1,646</p>
+                    <p class="overview_type">Hits</p>
+                    <p class="overview_count">2,054</p>
+                    <p class="overview_type">Views</p>
+                </div>
+            </article>
+            <div class="clear"></div>
+        </div>
+    </article><!-- end of stats article -->
+
+</block>

@@ -1,0 +1,282 @@
+<!DOCTYPE html  "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="易书城是3Q旗下的互联网领域垂直订书网站,互联网订书尽在易书城" name="description">
+    <meta content="易书,易书城,易书购书，移动互联网购书, 垂直互联网购书, 微信购书, 微博购书, 易书官网, 易书百科" name="keywords">
+    <title>易书城</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/front.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/other.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" />
+
+     <block name=css></block>
+</head>
+<body>
+<div id="qqcaibei_header_panel" class="navbar navbar-inverse navbar-static-top" style="display: none;">
+    <div class="navbar-inner"> <div class="container"> <div class="row"> <span id="qqcaibei_header_panel_headshow">这里是用户信息显示</span> <span id="qqcaibei_header_panel_showmsg">这里是用户消息</span> <span><a id="qqcaibei_header_panel_jifenurl" target="_blank" href="#">查看彩贝积分</a></span> </div> </div> </div> </div>
+
+<block name=begin>
+</block>
+
+<div class="navbar navbar-static-top" > <div class="navbar-inner bzf_header_login_register">
+    <div class="container"> <span class="bzf_welcome">
+            您好，欢迎来到易书城！&nbsp;&nbsp;
+            <a href="__ROOT__/User/login">登陆</a>&nbsp;|
+            <a href="__ROOT__/User/reg">注册</a>&nbsp;
+            </span>
+        |&nbsp;<a href="__ROOT__/User/center">个人中心</a>&nbsp;|&nbsp;客服QQ&nbsp;
+            <span> <a style="color:red;font-weight: bold;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1562122082&amp;site=qq&amp;menu=yes">
+                1562122082
+            </a> </span>&nbsp;|&nbsp;客服电话&nbsp;
+    <span style="color:red;font-weight: bold;">18600952356</span>
+    &nbsp;&nbsp;
+</div>
+</div>
+</div>
+<!--搜索-->
+<div class="navbar navbar-static-top">
+    <div class="navbar-inner bzf_header_logo_search">
+        <div class="container">
+            <form method="GET" action="__ROOT__/book/search">
+                <div class="row">
+                     <span style="width:225px; height: auto">
+                         <a href="__ROOT__">
+                                <img src="__PUBLIC__/images/frontlogo.png">
+                         </a>
+                     </span>
+                    <span class="bzf_header_search_block">
+                        <img src="__PUBLIC__/images/search.png">
+                        <input type="text" name="bookname" value="{$Think.session.keyword}" placeholder="书名/标签/作者">
+                        <button type="submit">搜&nbsp;索</button>
+                    </span>
+                    <span class="bzf_header_cart_block">
+                        <a href="/bzfshop/My/Order.html">
+                        我的易书城
+                        </a>
+                    </span>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--菜单-->
+<div class="navbar navbar-static-top">
+    <div class="navbar-inner bzf_header_nav_menu_dropdown">
+      <div class="container">
+          <ul id="bzf_header_nav_menu" class="nav">
+            <li class="{$menu1}"> <a id="bzf_header_dropdown_menu" href="__ROOT__">首页<span class="bzf_header_dropdown_menu_icon"></span></a> </li>
+            <li class="{$menu2}"> <a href="__ROOT__/Book/books">书籍列表</a> </li>
+            <li class="{$menu3}"> <a href="__ROOT__/Book/specials">特价</a> </li>
+            <eq name="Think.session.login" value="login">
+                  <li class="{$menu4}"><a href="__ROOT__/Book/pay">我的订单</a></li>
+                  <li class="{$menu5}"><a href="__ROOT__/User/center">个人中心</a></li>
+                  <li class="{$menu6}"><a href="__ROOT__/User/logout">注销</a></li>
+            </eq>
+            <neq name="Think.session.login" value="login">
+                  <li class="{$menu7}"><a href="__ROOT__/User/reg">注册</a></li>
+                  <li class="{$menu8}"><a href="__ROOT__/User/login">登录</a></li>
+            </neq>
+          </ul>
+      </div>
+    </div>
+</div>
+<!-- body主体-->
+<div id="main_body" class="container">
+
+<div class="center_content">
+
+    <div class="left_content">
+        <block name=left>
+            <div class="title">
+                今日推荐
+            </div>
+            <volist name="books" id="vo">
+                <div class="feat_prod_box">
+                    <div class="prod_img"><a href="Index/details.htm"><img src="__PUBLIC__/img/{$vo.id}.jpg" alt="" title="" border="0" /></a></div>
+                    <div class="prod_det_box">
+                        <div class="box_top"></div>
+                        <div class="box_center">
+                            <div class="prod_title">{$vo.cnname}&nbsp;&nbsp;&nbsp;&nbsp;{$vo.author}&nbsp;&nbsp;&nbsp;&nbsp;{$vo.price}￥</div>
+                            <p class="details">{$vo.tag}</p>
+                            <p class="details">{$vo.summary}</p>
+                            <a href="__ROOT__/Book/detail/bid/{$vo.id}" class="more">- 详细 内容 -</a>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="box_bottom"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </volist>
+
+            <div class="title">
+                    新书 上架
+            </div>
+            <div class="new_products">
+                <volist name="newbooks" id="vo">
+                    <div class="new_prod_box"> <a href="__ROOT__/Book/detail/bid/{$vo.id}">{$vo.cnname}
+                   <div class="new_prod_bg"> <span class="new_icon"><img src="__PUBLIC__/img/{$vo.id}.jpg" alt="{$vo.cname}" title="{$vo.cname}" /></span></a></a> </div>
+                     </div>
+            </volist>
+
+    </div>
+    <div class="clear"></div>
+    </block>
+</div>
+
+<!--end of left content-->
+<div class="right_content">
+    <block name=right>
+
+
+        <div class="cart">
+            <div class="title">
+                <span class="title_icon"> <a href="__ROOT__/Book/pay">支付</a></span>
+
+             </div>  &nbsp;
+            <p id="total">   </p>
+
+            <p><a href="#" style="background-color: transparent;" id="godetails">&nbsp;</a></p>
+            <div id="details" class="details" ></div>
+        </div>
+
+
+        <div class="right_box">
+            <div class="title"><span class="title_icon"><img src="__PUBLIC__/images/bullet5.gif" alt="" title="" /></span>分类</div>
+            <ul class="list">
+                <volist name="Think.session.bookcats" id="vo">
+                    <li><a href="__ROOT__/Book/cats/cid/{$vo.id}">{$vo.name}({$vo.num})</a></li>
+                </volist>
+
+            </ul>
+            <div class="title"><span class="title_icon"><img src="__PUBLIC__/images/bullet6.gif" alt="" title="" /></span>合作伙伴</div>
+            <ul class="list">
+                <volist name="Think.session.shops" id="vo">
+                    <li><a href="__ROOT__/Book/shops/sid/{$vo.id}">{$vo.name}</a></li>
+                </volist>
+            </ul>
+            <div class="title"><span class="title_icon"><img src="__PUBLIC__/images/bullet4.gif" alt="" title="" /></span>公告</div>
+            <ul class="list">
+                <volist name="Think.session.pubs" id="vo">
+                    <li><a href="__ROOT__/Pub/pubs/pid/{$vo.id}">{$vo.title}</a></li>
+                </volist>
+            </ul>
+        </div>
+
+</div>
+
+<!--end of right content-->
+<div class="clear"></div>
+</block>
+</div>
+<!--end of center content-->
+</div>
+<!-- 购物车-->
+<div id="bzf_right_float_panel" class="bzf_right_float_panel" style="position: fixed; bottom: 100px; right: 0px; opacity: 1; cursor: pointer; left: 1137px;">
+   <div id="bzf_right_float_kefu_block" class="bzf_right_float_panel_block">
+       <span class="icon_kefu"></span>
+       <div class="bzf_popover_html" style="display: none;">
+           <div class="bzf_supplier_pane" style="width:216px;">
+               <div class="header">
+            商家信息
+               </div>
+               <div class="supplier_pane_content">
+                   <div class="bzf_show">
+                       <div class="supplier_info">
+                           <p>商 户 名 ：易书城</p> <p>所 在 地 ：北京市</p> <p>客服电话：010-10086</p> <p>客服 QQ：800018599</p>
+                       </div>
+                       <div class="divider"></div>
+                       <div class="supplier_info" style="text-align: center;">
+                           <p>周一至周五 10:00-19:00</p>
+
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+    <div id="bzf_right_float_cart_block" class="bzf_right_float_panel_block">
+        <span class="icon_cart"></span>
+    </div>
+    <div class="bzf_right_float_panel_block" onclick="jQuery(document).scrollTo('0px',800);">
+        <span class="icon_back_to_top"></span>
+        <div class="bzf_hide" style="width:60px;font-weight: bold;text-align: center;line-height: 40px;">
+    返回顶部
+        </div>
+    </div>
+</div>
+<!--  免责条款-->
+<div class="container">
+    <div class="row bzf_footer_credit_panel">
+        <span><i class="bzf_icon_zhengping"></i>正品保证</span>
+        <span><i class="bzf_icon_fahuo" style="width:51px;"></i>闪电发货</span>
+        <span><i class="bzf_icon_qitian"></i>七天退换</span>
+        <span><i class="bzf_icon_money" style="width:42px;height:42px;"></i>退款保障</span>
+    </div>
+    <div class="row bzf_footer_tail">
+        <p><a target="_blank" href="__ROOT__">易书城</a> |
+            <a target="_blank" href="__ROOT__/Index/about">关于我们</a> |
+            <a target="_blank" href="__ROOT__/Index/contact">联系我们</a> |
+
+            <a target="_blank" href="http://www.baidu.com/">友情链接1</a>
+        </p>
+        <p>易书城 版权所有 ©Copyright 2010-2014 All Rights Reserved</p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000370871'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000370871%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        <p>ICP备案：<a target="_blank" href="http://www.miit.gov.cn/">京ICP备100号-1</a></p>
+    </div>
+</div>
+
+<block name=js><script src="__PUBLIC__/admin/js/jquery-1.10.2.min.js"></script></block>
+<script>
+    var WEB_ROOT_HOST = 'http://localhost';
+    var WEB_ROOT_BASE = '__ROOT__';
+    var WEB_ROOT_BASE_RES = 'http://localhost/__PUBLIC__/public/';
+</script>
+
+<script>
+
+    $(function(){
+        top1=$(document).scrollTop()+(($(window).height())/4);
+        $('.cart').animate({top:top1+"px"},{duration:0,queue:false});
+        $(window).scroll(function(){
+
+            top1=$(document).scrollTop()+(($(window).height())/4);
+            $('.cart').animate({top:top1+"px"},{duration:0,queue:false});
+        });
+        $orderclick=function(){
+            if($('#bcount').val()>0)
+                bcount=$('#bcount').val();
+            else
+                bcount=0;
+
+
+            $.getJSON('__ROOT__/Book/order/bid/'+<?php if(isset($book)) echo $book['id'];else echo 0;?>+'/count/'+bcount,function(data){
+                tips='';
+                total=0;
+                bn=0;
+                for(i=0;i<data.length;i++){
+                    item=data[i];
+                    bn++;
+
+                    total+=item['count']*item['price']*item['discont']/10;
+                     tips+=item['cnname']+'&nbsp;';
+                    tips+=item['price']+'￥&nbsp;';
+                    tips+=item['count']+'本';
+                    tips+='<br/>';
+                }
+                tips+='<br/><br/>';
+
+                $('#total').html(''+bn+'种|折后总价:'+total+'￥');
+                $('#msg').html(tips);
+
+                $('#details').html(tips);
+            })};
+        $('#bcount').val(0)
+        $orderclick();
+        $('#order').click($orderclick);
+    });
+</script>
+
+</body>
+</html>

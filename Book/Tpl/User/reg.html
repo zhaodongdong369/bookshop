@@ -1,0 +1,120 @@
+<extend name="/base" />
+<block name=css>
+    <style>
+        .warning{
+            color:#ff4500;
+        }
+        .pass{
+            color:green;
+        }
+    </style>
+</block>
+<block name=left>
+
+    <div class="feat_prod_box_details">
+
+        <div class="contact_form">
+            <div class="form_subtitle">加入电子书城</div>
+            <form action="__ROOT__/User/regdo" method="post" id="subform">
+                <div class="form_row">
+                    <label class="contact"><strong>用户名:</strong></label>
+                    <input type="text" class="contact_input" name="username" id="username" /><div id="nametip">&nbsp;</div>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>密码:</strong></label>
+                    <input type="password" class="contact_input" name="password" id="password"  />
+                    <div id="passtip">&nbsp;</div>
+                </div>
+
+                <div class="form_row">
+                    <label class="contact"><strong>手机号码:</strong></label>
+                    <input type="text" class="contact_input" name="tel" id="tel"/>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>电子邮箱:</strong></label>
+                    <input type="text" class="contact_input" name="email" id="email"/>
+                    <div id="emailtip">&nbsp;</div>
+                </div>
+
+                <div class="form_row">
+                    <label class="contact"><strong>配送地址:</strong></label>
+                    <input type="text" class="contact_input" name="addr" id="addr"/>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>问题:</strong></label>
+                    <input type="text" class="contact_input" name="ques" id="ques"/>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>答案:</strong></label>
+                    <input type="text" class="contact_input" name="answer" id="answer"/>
+                </div>
+
+                <div class="form_row">
+                    <div class="terms">
+                        <input type="checkbox" name="terms" />
+                        我同意遵守 <a href="#">声明 &amp; 协议</a> </div>
+                </div>
+
+                    <input type="submit" class="register" value="注册" />
+
+            </form>
+        </div>
+    </div>
+    <script src="__PUBLIC__/admin/js/jquery-1.5.2.min.js"></script>
+    <script>
+        $(function(){
+            $('#subform').submit(function(){
+                if($('#username').val()==''||$('#password').val()==''||$('#email').val()==''||$('#tel').val()==''||$('#addr').val()==''
+                        ||$('#ques').val()==''||$('#answer').val()==''){
+                        alert('请填写完整信息');
+                        return false;
+                }
+
+
+            });
+
+            $('#email').keyup(function(){
+                var mail = $('#email').val();
+                if (mail != '') {
+                    var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+                    if (!reg.test(mail)){
+                        $('#emailtip').html('格式还不正确');
+                        $('#emailtip').addClass('warning');
+                    }else{
+                        $('#emailtip').html('邮箱格式正确');
+                        $('#emailtip').addClass('pass');
+                    }
+                }
+            });
+            $('#password').keyup(function(){
+                password=$('#password').val();
+                if(password.length<6){
+                    $('#passtip').html('密码长度小于6位');
+                    $('#passtip').addClass('warning');
+                }else{
+                    $('#passtip').html('密码长度合理');
+                    $('#passtip').addClass('pass');
+
+                }
+
+            });
+            $('#tel').keyup(function(){
+                tel=$('#tel').val();
+                if(isNaN(tel)){
+                    $('#tel').val('');
+                }
+            });
+            $('#username').keyup(function(){
+                username=$('#username').val();
+                $.get('__ROOT__/User/checkName/name/'+username,function(data){
+
+                    if(data=='ok') $('#nametip').html("<font color='green'>用户名可用</font>");else $('#nametip').html('' +
+                            "<font color='#ff4500'>用户名已存在</font>");
+
+                });
+
+            });
+        });
+    </script>
+    <div class="clear"></div>
+</block>

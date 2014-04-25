@@ -1,0 +1,46 @@
+<extend name="/base" />
+<block name=css>
+
+</block>
+<block name=left>
+   <div class="feat_prod_box_details">
+
+        <div class="contact_form">
+            <div class="form_subtitle">登录账号</div>
+            <form id="subform" name="login" action="__ROOT__/User/dologin" method="post">
+                &nbsp;
+                <fieldset>
+                    <label id="get">用户名</label>
+                    <input type="text" id="username" name="username"  />
+                </fieldset>
+            <fieldset>
+                <label id="get">密码</label>
+                <input type="password" id="password" name="password"   />
+            </fieldset>
+            <fieldset>
+                <label id="get"> 一周内免登录 <input type="checkbox" name="terms" /></label>
+
+            </fieldset>
+            <fieldset>
+                <input type="submit"  class="register" value="登录" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="button" id="reg" class="register" value="注册" />
+            </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <script src="__PUBLIC__/admin/js/jquery-1.5.2.min.js"></script>
+    <script>
+        $(function(){
+            $('#subform').submit(function(){
+                if($('#username').val()==''||$('#password').val()==''){
+                    alert('请填写所有信息');
+                    return false;
+                }
+            });
+            $('#reg').click(function(){
+                window.location.href="__ROOT__/User/reg";
+            });
+        });
+    </script>
+</block>

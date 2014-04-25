@@ -1,0 +1,33 @@
+<extend name="/base" />
+<block name=left>
+    <div class="contact_form">
+        <div class="form_subtitle"> 特价</div>
+
+
+    <volist name="books" id="vo">
+    <div class="feat_prod_box">
+        <div class="prod_img">
+            <a href="__ROOT__/book/detail/bid/{$vo.id}">
+            <img src="__PUBLIC__/img/{$vo.id}.jpg" alt="{$vo.cnname}" />
+            </a>
+        </div>
+        <div class="prod_det_box">
+
+           <div class="box_center">
+                <div class="prod_title"><a href="__ROOT__/book/detail/bid/{$vo.id}">{$vo.cnname}
+                    </a><u>{$vo.discont}折</u></div>
+
+                <p class="details">{$vo.summary}.</p>
+                <a href="__ROOT__/book/detail/bid/{$vo.id}" class="more">- more details -</a>
+                <div class="clear"></div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    </volist>
+    <div class="pagination">
+    {$page}
+    </div>
+    </div>
+</block>

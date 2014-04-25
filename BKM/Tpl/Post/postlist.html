@@ -1,0 +1,78 @@
+<extend name="/base" />
+<block name="p1">管理</block>
+<block name="p2">留言列表</block>
+<block name="main">
+    <script>
+    function changestate(pid){
+        $.get('__ROOT__/Pub/fabu/pid/'+pid,function(data){
+            if(data=='1'){
+                $('#tips').html('发布成功');
+                $('#change'+pid).text('已发布');
+            }else{
+                $('#tips').html('已存为草稿');
+                $('#change'+pid).text('草稿');
+            }
+
+        });
+    }
+    function del(id){
+        $.get('__ROOT__/Post/del/pid/'+id,function(data){
+            if(data){
+                $('#tips').html('删除成功');
+               $('#row'+id).remove();
+            }
+        });
+    }
+    </script>
+    <article class="module width_full">
+            <header><h3 class="tabs_involved">留言列表</h3>
+                <ul class="tabs">
+                    <li><a href="#tab1">留言列表</a></li>
+            </ul>
+            </header>
+
+            <div class="tab_container">
+                <div id="tab1" class="tab_content">
+                    <table class="tablesorter" cellspacing="0">
+                        <thead>
+
+                        <tr>
+
+                            <th>留言ID</th>
+                            <th>姓名</th>
+                            <th>邮件</th>
+                            <th>电话</th>
+                            <th>公司</th>
+                            <th>内容</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="list" id="vo">
+                            <tr id="row{$vo.id}">
+                                <td>{$vo.id}</td>
+                                <td>{$vo.username}</td>
+                                <td>{$vo.email}</td>
+                                <td>{$vo.phone}</td>
+                                <td>{$vo.company}</td>
+                                <td>{$vo.content}</td>
+                                <td>{$vo.posttime}</td>
+
+                                <td>
+                                    <a  id="del{$vo.id}" onclick="del('{$vo.id}')" >删除</a>
+
+                                </td>
+                            </tr>
+                        </volist>
+                        <tr><td colspan="8" id="tips"></td></tr>
+                        <tr><td colspan="8">{$page}</td></tr>
+
+                        </tbody>
+                    </table>
+                </div><!-- end of #tab1 -->
+            </div><!-- end of .tab_container -->
+
+        </article><!-- end of content manager article -->
+
+</block>

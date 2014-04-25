@@ -1,0 +1,135 @@
+<extend name="/base" />
+<block name=left>
+    <div class="title">{$book.cnname}</div>
+    <div class="feat_prod_box_details">
+        <div class="prod_img">
+        <img src="__PUBLIC__/img/{$book.id}.jpg" alt="{$book.cnname}" title="{$book.bookname}" border="0" /> <br />
+            <br />
+            <a href="__PUBLIC__/images/big_pic.jpg" rel="lightbox" target="_blank"><img src="__PUBLIC__/images/zoom.gif" alt="" title="" border="0" /></a> </div>
+        <div class="prod_det_box">
+            <div class="box_top"></div>
+            <div class="box_center">
+
+                <div class="prod_title">详细信息</div>
+
+                <p class="details">
+
+                <p><strong>分类:</strong>{$catname}</p>
+                <p><strong>标签:</strong>{$book.tag}</p>
+                    <strong>摘要:</strong> {$book.summary} </p>
+                <div class="price"><strong>价格:</strong> <span class="red">{$book.price}</span></div>
+                <div class="price"><strong>包装:</strong> <span class="colors"><img src="__PUBLIC__/images/color1.gif" alt="" title="" border="0" /></span> <span class="colors"><img src="__PUBLIC__/images/color2.gif" alt="" title="" border="0" /></span> <span class="colors"><img src="__PUBLIC__/images/color3.gif" alt="" title="" border="0" /></span> </div>
+                数量:
+                <input id="bcount"  type="text" value="0" maxlength="2" />&nbsp;
+                <a href="#" id="plus"> <img src="__PUBLIC__/images/add.png"   height="40px" width="40px"   />
+                </a>
+                <a  id="dec" href="#">
+                <img src="__PUBLIC__/images/dec.png"  height="40px" width="40px" />
+                </a>
+                <a href="#" class="more" id="order">
+                    <img src="__PUBLIC__/images/order.png"  height="40px" width="40px"  border="0" />
+                </a>
+                <div class="clear"></div>
+            </div>
+            <div class="box_bottom"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="demo" class="demolayout">
+        <ul id="demo-nav" class="demolayout">
+            <li><a  id="nav1" class="active">更多信息</a></li>
+            <li><a id="nav2">相关书籍</a></li>
+        </ul>
+        <div class="tabs-container">
+            <div style="display: block;" class="tab" id="tab1">
+                <p class="more_details">
+                    &nbsp;&nbsp;{$book.author_intro}
+                </p>
+                <hr>
+                <p class="more_details">我也说一句</p>
+
+                    <textarea id="content" rows="4" cols="60"></textarea><br/>
+                    <button id="sub">评论</button>
+                <hr>
+               <p class="more_details">最新评论</p>
+                <ul class="list" id="comlist">
+                    <volist name="coms" id="vo">
+                        <li><a href="#"><b><u>{$vo.name}</u></b> {$vo.comcontent}&nbsp;&nbsp;</a></li>
+                    </volist>
+                </ul>
+                </div>
+            <div class="tab" id="tab2">
+                <volist name="relbook" id="vo">
+                    <div class="new_prod_box"> <a href="__ROOT__/book/detail/bid/{$vo.id}">{$vo.cnname}</a>
+                        <div class="new_prod_bg"> <a href="__ROOT__/book/detail/bid/{$vo.id}">
+    <img width="100px" height="140px" src="__PUBLIC__/img/{$vo.id}.jpg" alt="" title="" class="thumb" border="0" /></a>
+                        价格:{$vo.price}
+                        </div>
+                    </div>
+                </volist>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="__PUBLIC__/admin/js/jquery-1.10.2.min.js"></script>
+    <script>
+
+        $('#tab2').hide();
+        $(function(){
+            $('#sub').click(function(){
+                content=$('#content').val();
+                $.get('__ROOT__/Book/subcom/bid/{$book.id}/comcontent/'+content,function(data){
+                    if(data=='ok'){
+                        $('<li><a href="#"><b><u>我</u></b>&nbsp;&nbsp;留言成功'+"</a></li>").appendTo($('#comlist'));
+                    }else if(data=='login'){
+                        window.location.href='__ROOT__/User/login';
+                    }
+                });
+            });
+            $('#plus').click(function(){
+
+                if(isNaN(parseInt($('#bcount').val())))
+                {
+                    $('#bcount').val(0);
+                }else{
+                    num=$('#bcount').val()-0+1;
+                    $('#bcount').val(num);
+
+                }
+
+            });
+            $('#dec').click(function(){
+                if(isNaN(parseInt($('#bcount').val())))
+                {
+
+                    $('#bcount').val(0);
+                }else{
+
+                num=$('#bcount').val()-1;
+                if(num>-1){
+                    $('#bcount').val(num);
+                }
+                }
+            });
+            $('#nav1').hover(function(){
+                $('#tab1').show();
+                $(this).addClass('active');
+                $('#nav2').removeClass('active');
+                $('#tab2').hide();
+
+            });
+            $('#nav2').hover(function(){
+                $('#tab1').hide();
+                $('#nav1').removeClass('active');
+                $('#tab2').show();
+                $(this).addClass('active');
+
+            });
+
+
+        });
+    </script>
+    <div class="clear"></div>
+</block>

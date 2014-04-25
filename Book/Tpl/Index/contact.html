@@ -1,0 +1,33 @@
+<extend name="/base" />
+<block name=left>
+    <div class="feat_prod_box_details">
+        <div class="contact_form">
+            <div class="form_subtitle">留言</div>
+            <form action="__ROOT__/Post/add" method="post">
+            <div class="form_row">
+                <label class="contact"><strong>姓名:</strong></label>
+                <input type="text" name="username" class="contact_input" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>电子邮箱:</strong></label>
+                <input type="text" name="email" class="contact_input" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>联系方式:</strong></label>
+                <input type="text" name="phone" class="contact_input" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>公司:</strong></label>
+                <input type="text" name="company" class="contact_input" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>留言内容:</strong></label>
+                <textarea name="content" class="contact_textarea" ></textarea>
+            </div>
+            <div class="form_row"> <input type="submit" class="btn" value="留言" /> </div>
+            </form>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+</block>

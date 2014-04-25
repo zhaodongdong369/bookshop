@@ -1,0 +1,39 @@
+<extend name="/base" />
+<block name="p1">管理</block>
+<block name="p2">SEO详情</block>
+<block name="main">
+
+
+    <article class="module width_full">
+        <header><h3>SEO详情</h3></header>
+        <form action="__ROOT__/User/update" method="post" >
+            <input type="hidden" name="id" value="{$user.id}" />
+            <table class="table table-bordered table-striped">
+                <thead><th>字段</th><th>值</th></thead>
+                <tbody>
+                <tr>
+                    <td>用户名</td><td>{$user.username}</td>
+                </tr>
+                <tr><td>真实姓名</td><td><input type="text" name="truename" value="{$user.truename}" /> </td></tr>
+
+                <tr> <td>联系方式</td><td><input type="text" name="tel" value="{$user.tel}" /></td></tr>
+                <tr><td>电子邮箱</td><td><input type="text" name="email" value="{$user.email}" /></td></tr>
+                <tr><td>地址</td><td><input type="text" name="addr" value="{$user.addr}" /></td></tr>
+                <tr><td>问题</td><td><input type="text" name="ques" value="{$user.ques}" /></td></tr>
+                <tr><td>回答</td><td><input type="text" name="answer" value="{$user.answer}" /></td></tr>
+                <tr><td>登陆次数</td><td><input type="text" name="logtime" value="{$user.logtime}" /></td></tr>
+                <tr><td>上次登录</td><td><input type="text" name="lastlogtime" value="{$user.lastlogtime}" /></td></tr>
+                <tr><td>注册时间</td><td>{$user.regtime}</td></tr>
+                <tr><td colspan="2" style="text-align: center"><input type="submit" value="更新" class="button"  /> </td> </tr>
+                </tbody>
+
+            </table>
+
+        </form>
+
+
+    </article>
+    <!-- end of post new article -->
+
+
+</block>

@@ -1,0 +1,67 @@
+<extend name="/base" />
+<block name="p1">订单</block>
+<block name="p2">未完成订单</block>
+<block name="main">
+
+
+        <article class="module">
+            <header><h3>订单列表</h3></header>
+            <fieldset>
+                <form action="__ROOT__/Order/uorderlist" method="get">
+                    <table class="table  table-striped">
+                        <td>选择日期 <img style="cursor:pointer" onClick="zwl_setdate_moveShow(event,'select',(new Date()).getFullYear(),(new Date()).getMonth()+1,(new Date()).getDate())"
+                                      src="__PUBLIC__/images/calendar.gif" /></td>
+                        <td>
+
+                            <input name="select" type="text" id="select" size="18" value="{$select}"  >
+
+                        </td>
+
+                        <td><input type="submit" value="搜索" /> </td>
+
+                    </table>
+                </form>
+                <table class="table  table-striped">
+                    <thead><th>订单Id</th><th>订单时间 </th><th>订单内容</th>
+                    <th>总价格</th><th>收件人</th><th>操作</th></thead>
+                    <tbody>
+
+                    <volist name="list" id="vo">
+                        <tr><td>{$vo.id}</td>
+                            <td>{$vo.ordertime}</td>
+                            <td>{$vo.tip}</td>
+                            <td>{$vo.total} ￥</td>
+                            <td>{$vo.username}</td>
+                            <td><a id="del{$vo.id}" href="#" onclick="del({$vo.id})" >删除</a> </td>
+
+                        </tr>
+                    </volist>
+
+                    </tbody>
+                </table>
+            </fieldset>
+ <div class="clear"></div>
+            <footer>{$page}</footer>
+
+        </article>
+        <!-- end of post new article -->
+    <script src="__PUBLIC__/js/zwl_Calendars.js"></script>
+    <script>
+        date_obj=new zwl_setdate_panel();
+        date_obj.startYear=2014;
+        date_obj.endYear=2020;
+        date_obj.loadding();
+    function del(id){
+        $ret=confirm("确定要删除该项目?");
+        if($ret){
+            $.get('__ROOT__/Order/del/id/'+id,function(data){
+                if(data){
+                    $('#del'+id).html('已删除');
+                }
+            });
+        }
+    }
+
+</script>
+
+</block>

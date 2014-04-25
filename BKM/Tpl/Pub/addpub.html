@@ -1,0 +1,59 @@
+<extend name="/base" />
+<block name="p1">管理</block>
+<block name="p2">添加公告</block>
+<block name=css>
+    <link rel="stylesheet" href="__PUBLIC__/css/sample.css">
+
+</block>
+<block name="main">
+
+
+    <article class="module width_full">
+        <header><h3>添加公告</h3></header>
+        <div class="module_content">
+            <form method="post" action="__ROOT__/Pub/publish" id="form">
+                &nbsp;
+                <fieldset>
+                    <label id="get">标题</label>
+                    <input type="text" name="title" id="title" />
+                </fieldset>
+
+                <fieldset>
+
+                    <textarea class="ckeditor" cols="80" id="editor1" name="content" rows="10">
+                    </textarea>
+                </fieldset>
+                <fieldset>
+                    <select name="state">
+                        <option value="1">发布</option>
+                        <option value="0">草稿</option>
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <input type="button" id="sub" value="提交" />
+                </fieldset>
+
+                <fieldset style="display: none">
+                    <div id="tips" class="warning"></div>
+                </fieldset>
+            </form>
+        </div>
+        <footer>
+
+        </footer>
+
+    </article>
+    <!-- end of post new article -->
+    <script src="__PUBLIC__/ckeditor/ckeditor.js"></script>
+    <script>
+        $('#sub').click(function(){
+            if($('#title').val()==''||$('#content').val()==''){
+                $('#tips').html('请填写完整');
+                return false;
+            }else {
+                $('#form').submit();
+            }
+        });
+    </script>
+
+</block>

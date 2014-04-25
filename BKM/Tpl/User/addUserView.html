@@ -1,0 +1,74 @@
+<extend name="/base" />
+     <block name="p1">用户</block>
+     <block name="p2">添加新用户</block>
+     <block name="main">
+
+
+         <article class="module width_full">
+             <header><h3>添加新用户</h3></header>
+             <div class="module_content">
+                 <form action="__ROOT__/User/add" method="post" id="subform">
+                   <fieldset>
+                         <label>用户名:</label>
+                         <input type="text" class="contact_input" name="username" id="username" /><div id="nametip">&nbsp;{$tips}</div>
+                   </fieldset>
+                     <fieldset>
+                         <label>密码:</label>
+                         <input type="text" class="contact_input" name="password" id="password" />
+                     </fieldset>
+                     <fieldset>
+                         <label>电子邮箱:</label>
+                         <input type="text" class="contact_input" name="email" id="name" />
+                     </fieldset>
+                    <fieldset>
+                         <label><strong>联系方式:</strong></label>
+                         <input type="text" class="contact_input" name="tel" id="tel"/>
+                    </fieldset>
+                     <fieldset>
+                         <label><strong>电子邮箱:</strong></label>
+                         <input type="text" class="contact_input" name="email" id="email"/>
+                     </fieldset>
+
+                     <fieldset>
+                         <label><strong>配送地址:</strong></label>
+                         <input type="text" class="contact_input" name="addr" id="addr"/>
+                     </fieldset>
+                     <fieldset>
+                         <label><strong>问题:</strong></label>
+                         <input type="text" class="contact_input" name="ques" id="ques"/>
+                     </fieldset>
+                     <fieldset>
+                         <label><strong>答案:</strong></label>
+                         <input type="text" class="contact_input" name="answer" id="answer"/>
+                     </fieldset>
+
+                     <fieldset>
+                         <input type="submit" class="register" value="添加用户" />
+                     </fieldset>
+              </form>
+
+             </div>
+         </article><!-- end of post new article -->
+         <script src="__PUBLIC__/admin/js/jquery-1.5.2.min.js"></script>
+         <script>
+             $(function(){
+                 $('#subform').submit(function(){
+                     if($('#username').val()==''||$('#password').val()==''||$('#email').val()==''||$('#tel').val()==''||$('#addr').val()==''
+                             ||$('#ques').val()==''||$('#answer').val()==''){
+                         alert('请填写完整信息');
+                         return false;
+                     }
+
+                 });
+                 $('#username').keyup(function(){
+                     username=$('#username').val();
+                     $.get('__ROOT__/User/checkName/name/'+username,function(data){
+
+                         if(data=='ok') $('#nametip').html("<font color='green'>用户名可用</font>");else $('#nametip').html('' +
+                                 "<font color='#ff4500'>用户名已存在</font>");
+
+                     });
+                 });
+             });
+         </script>
+</block>

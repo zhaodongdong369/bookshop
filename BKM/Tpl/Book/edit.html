@@ -1,0 +1,171 @@
+<extend name="/base" />
+<block name="p1">书籍</block>
+<block name="p2">添加新书</block>
+<block name="main">
+
+
+    <article class="module width_full">
+        <header><h3>添加新书</h3></header>
+        <div class="module_content">
+            <form method="post" action="__ROOT__/Book/publish" id="form">
+                <fieldset>
+
+                    <label id="get" class="alert-success">ISBN&nbsp;&nbsp;&nbsp;一键获取云端数据</label>
+                    <input type="text" name="isbn" id="isbn" value="{$book.isbn}">
+                </fieldset>
+                <div id="other">
+                    <fieldset>
+                        <label>书名</label>
+                        <input type="text" name="bookname" id="bookname" value="{$book.bookname}">
+                    </fieldset>
+                    <fieldset>
+                        <label>[中文译名]</label>
+                        <input type="text" name="cnname" id="cnname" value="{$book.cnname}">
+                    </fieldset>
+                    <fieldset>
+                        <label>出版社</label>
+                        <input type="text" name="publisher" id="publisher" value="{$book.publisher}">
+                    </fieldset>
+
+                    <fieldset>
+                        <label>出版日期</label>
+                        <input type="text" name="pubdate" id="pubdate" value="{$book.pubdate}">
+                    </fieldset>
+                    <fieldset>
+                        <label>作者</label>
+                        <input type="text" name="author" id="author" value="{$book.author}">
+                    </fieldset>
+                    <fieldset>
+                        <label>作者简介</label>
+                        <input type="text" name="author_intro" id="author_intro" value="{$book.author_intro}">
+                    </fieldset>
+                    <fieldset>
+                        <label>摘要</label>
+                        <input type="text" name="summary" id="summary" value="{$book.summary}">
+                    </fieldset>
+
+                    <fieldset>
+                        <label>翻译</label>
+                        <input type="text" name="translator" id="translator" value="{$book.translator}">
+                    </fieldset>
+
+                    <fieldset>
+                        <label>价格</label>
+                        <input type="text" name="price" id="price" value="{$book.price}">
+                    </fieldset>
+                    <fieldset>
+                        <label>页数</label>
+                        <input type="text" name="pages" id="pages" value="{$book.pages}">
+                    </fieldset>
+
+                    <fieldset>
+                        <label>封面图片</label>
+                        <input type="text" name="pic" id="pic" value="{$book.pic}">
+                    </fieldset>
+                </div>
+                <fieldset>
+                    <label>折扣</label>
+                    <input type="text" name="discont" id="discont" value="{$book.discont}">
+                </fieldset>
+                <fieldset>
+                    <label>数量</label>
+                    <input type="text" name="storemount" id="storemount" value="{$book.storemount}">
+                </fieldset>
+                <fieldset>
+                    <label>装饰风格</label>
+                    <input type="text" name="packstyle" id="packstyle" value="{$book.packstyle}">
+                </fieldset>
+                <fieldset style="width:48%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
+                    <label>书籍分类</label>
+                    <select id="typeid" name="typeid" >
+                        <option value="0" style="height: 20px;">无</option>
+                        <volist name="cats" id="vo">
+                            <if condition="$book.typeid eq $vo.id "><option selected value="{$vo.id}">{$vo.name}</option>
+                                <else /> <option value="{$vo.id}">{$vo.name}</option>
+                            </if>
+
+
+                        </volist>
+                    </select>
+                </fieldset>
+                <fieldset style="width:48%; float:left;" > <!-- to make two field float next to one another, adjust values accordingly -->
+                    <label>书籍标签</label>
+                    <input type="text" style="width:92%;" id="tag" name="tag" value="{$book.tag}" >
+                </fieldset>
+                <fieldset>
+                    <div class="submit_link" >
+                        <select  name="sub">
+                            <eq name="book.sub" value="草稿"><option selected>草稿</option><option>发布</option></eq>
+                            <eq name="book.sub" value="发布"><option>草稿</option><option selected>发布</option></eq>
+
+                        </select>
+                        <input type="submit" id="sub" value="保存" class="alt_btn">
+                        <input type="submit" value="重置">
+                    </div>
+                </fieldset>
+                <input type="hidden" name="bid" value="{$book.id}" />
+                <div class="clear"></div>
+            </form>
+        </div>
+        <footer>
+
+        </footer>
+
+    </article>
+    <!-- end of post new article -->
+    <script>
+
+        $('#isbn').focus();
+        $('#sub').mouseup(function(){
+            $('#form').submit();
+        });
+        $('#get').click(function(){
+            var isbn=$('#isbn').val();
+            if(isbn!=''){
+                $.getJSON('__ROOT__/Book/getBookByISBN/isbn/'+isbn,function(data)
+                {
+                    $('#bookname').val(data['origin_title']);
+                    $('#bookname').val(data['origin_title']);
+                    $('#cnname').val(data['title']);
+                    $('#pubdate').val(data['pubdate']);
+                    $('#booksize').val(data['origin_title']);
+                    $('#bookversion').val(data['origin_title']);
+                    author=data['author'];
+                    authors='';
+                    for(i=0;i<author.length;i++){
+                        authors+=author[i];
+                        authors+=' ';
+                    }
+                    $('#author').val(authors);
+                    translator=data['translator'];
+                    trans='';
+                    for(i=0;i<translator.length;i++)
+                    {
+                        trans+=translator[i];
+                        trans+=' ';
+                    }
+                    $('#translator').val(trans);
+                    $('#price').val(data['price']);
+                    $('#pages').val(data['pages']);
+                    $('#pic').val(data['image']);
+
+
+                    tags1=data['tags'];
+                    taginfo='';
+                    for(i=0;i<tags1.length;i++){
+                        t=tags1[i];
+                        taginfo+= t['title'];
+                        taginfo+=' ';
+                    }
+                    $('#tag').val(taginfo);
+                    $('#packstyle').val(data['binding']);
+                    $('#publisher').val(data['publisher']);
+                    $('#summary').val(data['summary']);
+                    $('#author_intro').val(data['author_intro']);
+                });
+
+            }
+        } );
+    </script>
+
+</block>
