@@ -7,7 +7,7 @@
          <article class="module width_full">
              <header><h3>添加新用户</h3></header>
              <div class="module_content">
-                 <form action="__ROOT__/User/add" method="post" id="subform">
+                 <form action="/admin.php/User/add" method="post" id="subform">
                    <fieldset>
                          <label>用户名:</label>
                          <input type="text" class="contact_input" name="username" id="username" /><div id="nametip">&nbsp;{$tips}</div>
@@ -62,7 +62,7 @@
                  });
                  $('#username').keyup(function(){
                      username=$('#username').val();
-                     $.get('__ROOT__/User/checkName/name/'+username,function(data){
+                     $.get('/admin.php/User/checkName/name/'+username,function(data){
 
                          if(data=='ok') $('#nametip').html("<font color='green'>用户名可用</font>");else $('#nametip').html('' +
                                  "<font color='#ff4500'>用户名已存在</font>");

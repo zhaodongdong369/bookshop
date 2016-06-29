@@ -12,10 +12,10 @@ define('TP_DIR', ROOT_DIR . '/ThinkPHP/');
 define('__ADMIN__','/'.ADMIN_BASE.'/admin.php');
 //定义项目路径
 define('APP_NAME','BKM');
-define('APP_PATH','./BKM/');
+define('APP_PATH',ROOT_DIR.'/BKM/');
 
 //开启调试模式
-define('APP_DEBUG',true);
+define('APP_DEBUG', true);
 //设置public路径
 
 define('__PUBLIC__',ROOT_DIR.'/public/');

@@ -1,7 +1,7 @@
 ﻿# Host: localhost  (Version: 5.6.12-log)
 # Date: 2014-04-24 16:36:38
 # Generator: MySQL-Front 5.3  (Build 4.113)
-
+use bookstore;
 /*!40101 SET NAMES utf8 */;
 
 #

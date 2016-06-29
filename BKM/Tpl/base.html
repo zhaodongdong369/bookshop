@@ -49,7 +49,7 @@
 <body>
 <header id="header">
     <hgroup>
-        <h1 class="site_title"><a href="__ROOT__">易书城</a></h1>
+        <h1 class="site_title"><a href="/admin.php">易书城</a></h1>
         <h2 class="section_title"></h2>
         <div class="btn_view_site">
             <a href="/shop/index.php" target="_blank">前台 </a>
@@ -60,7 +60,7 @@
 <section id="secondary_bar">
     <div class="user">
         <p>{$Think.session.user.AdminName} </p>
-        <a class="logout_user" href="__ROOT__/User/logout" title="Logout">注销</a>
+        <a class="logout_user" href="/admin.php/User/logout" title="Logout">注销</a>
     </div>
     <div class="breadcrumbs_container">
         <article class="breadcrumbs"><a href="index.html"><block name="p1">书城管理员</block></a> <div class="breadcrumb_divider"></div>
@@ -75,36 +75,36 @@
     <hr/>
     <h3>书籍</h3>
     <ul class="toggle">
-        <li class="icn_new_article"><a href="__ROOT__/Book/addBookView">添加新书</a></li>
-        <li class="icn_edit_article"><a href="__ROOT__/Book/bookList">书籍列表</a></li>
-        <li class="icn_categories"><a href="__ROOT__/Book/bookCat">添加分类</a></li>
-        <li class="icn_categories"><a href="__ROOT__/Book/catlist">分类列表</a></li>
+        <li class="icn_new_article"><a href="/admin.php/Book/addBookView">添加新书</a></li>
+        <li class="icn_edit_article"><a href="/admin.php/Book/bookList">书籍列表</a></li>
+        <li class="icn_categories"><a href="/admin.php/Book/bookCat">添加分类</a></li>
+        <li class="icn_categories"><a href="/admin.php/Book/catlist">分类列表</a></li>
     </ul>
     <h3>用户</h3>
     <ul class="toggle">
-        <li class="icn_add_user"><a href="__ROOT__/User/addUserView">添加新用户</a></li>
-        <li class="icn_view_users"><a href="__ROOT__/User/userList">用户列表</a></li>
-        <li class="icn_profile"><a href="__ROOT__/User/stats">注册统计</a></li>
+        <li class="icn_add_user"><a href="/admin.php/User/addUserView">添加新用户</a></li>
+        <li class="icn_view_users"><a href="/admin.php/User/userList">用户列表</a></li>
+        <li class="icn_profile"><a href="/admin.php/User/stats">注册统计</a></li>
     </ul>
     <h3>订单管理</h3>
     <ul class="toggle">
-        <li class="icn_folder"><a href="__ROOT__/Order/forderList">已完成订单</a></li>
-        <li class="icn_photo"><a href="__ROOT__/Order/uorderList">未完成订单</a></li>
+        <li class="icn_folder"><a href="/admin.php/Order/forderList">已完成订单</a></li>
+        <li class="icn_photo"><a href="/admin.php/Order/uorderList">未完成订单</a></li>
 
     </ul>
     <h3>管理</h3>
     <ul class="toggle">
-        <li class="icn_settings"><a href="__ROOT__/Pub/addpub">添加公告</a></li>
+        <li class="icn_settings"><a href="/admin.php/Pub/addpub">添加公告</a></li>
 
-        <li class="icn_security"><a href="__ROOT__/Pub/publist">公告列表</a></li>
-        <li class="icn_security"><a href="__ROOT__/Post/postlist">留言列表</a></li>
-        <li class="icn_jump_back"><a href="__ROOT__/User/logout">注销</a></li>
+        <li class="icn_security"><a href="/admin.php/Pub/publist">公告列表</a></li>
+        <li class="icn_security"><a href="/admin.php/Post/postlist">留言列表</a></li>
+        <li class="icn_jump_back"><a href="/admin.php/User/logout">注销</a></li>
     </ul>
 
     <footer>
         <hr />
         <p><strong>Copyright &copy; 2011 易书城</strong></p>
-        <p>Theme by <a href="__ROOT__">EasyBook</a></p>
+        <p>Theme by <a href="/admin.php">EasyBook</a></p>
     </footer>
 </aside><!-- end of sidebar -->
 
